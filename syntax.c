@@ -36,15 +36,70 @@ SAY “message”
 ◦ The robot speaks the words contained in the string “message”.
 */
 	
+	initBuffer(expression);
+	char *token=nextToken();
+	//in the next set of if statements, we are checking to see if the first token is either 	REPEAT, WHILE, or SAY, else we return 0.
+
 	
+	//Checking to see that the expression follows the structure: REPEAT n TIMES comma-separated-  		list-of-commands END
+	
+	if (strcasecmp(token, "REPEAT")==0){
+		token=nextToken();
+		if(atoi(token)<=0){
+			return 0;
+		}
+		token=nextToken();
+		if(strcasecmp(token, "TIMES")!=0){
+			return 0;
+		}
+		token=nextToken();
+		while(isValidCommand(token)==1){
+			token=nextToken();
+		}
+		if(strcasecmp(token, "END")!=0){
+			return 0;
+		}
+		token=nextToken();
+		if(token!=NULL){
+			return 0;
+		}
+		return 1;
+	}
+	//Checking to see that the expression follows the structure: WHILE NOT c DO comma-separated 		list-of-commands END
 
-
-
-
-
-
-
-
+	if (strcasecmp(token, "WHILE")==0){
+		if(strcasecmp(token, "NOT")!=0){
+			return 0;
+		}
+		token=nextToken();
+		if(strcasecmp(token, "DETECTMARKER")!=0){
+			return 0;
+		}
+		token=nextToken();
+		if(strcasecmp(token, "DO")!=0){
+			return 0;
+		}
+		token=nextToken();
+		while(isValidCommand(token)==1){
+			token=nextToken();
+		}
+		if(strcasecmp(token, "END")!=0){
+			return 0;
+		}
+		token=nextToken();
+		if(token!=NULL){
+			return 0;
+		}
+		return 1;
+	}
+	//Checking to see that the expression follows the structure: SAY "message"
+	if (strcasecmp(token, "SAY")==0){
+		token=nextToken();
+		if(token!=NULL){
+			return 1;	
+		}
+	}
+	return 0;
 }
-void main(void){
-}
+void main(void)
+{}
