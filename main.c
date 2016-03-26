@@ -24,16 +24,26 @@ void main(int argc,char *argv[])
 		return;
 	}
 	// retrieving a line from the txt file
+	int linenumber=1;
 	fgets(line,299,file_ptr);
-	//retrieving the subsequent lines
+	//checking syntax of line and then retrieving the subsequent lines
 	while (!feof(file_ptr)){
+		//No spaces, command
+		if(strchr(line,' ')==NULL) {
+			if (isValidCommand(line)==0){
+				printf("ERROR!!! you messed up on line: %d/n%s/n", linenumber, line);
+				
+			}
+		} 
+		//Has spaces, expression
+		else {
+			if (isValidExpression(line)==0){
+				printf("ERROR!!! you messed up on line: %d/n%s/n", linenumber, line);
+			}
+		}
+		linenumber++;
 		fgets(line, 299, file_ptr);
 	}
 	fclose(file_ptr);
-	
-	
-
-
 }
 
-./a.out file.txt file2.txt ayy.txt lmao.txt
