@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <syntax.h>
+#include "syntax.h"
 #define BOOLEAN int
 
 //intializing the buffer and backup buffer to be used by the following functions
@@ -20,7 +20,7 @@ void initBuffer(char *inputLine){
 }
 BOOLEAN hasNextToken(){
 //this method determines whether there exists more space in the buffer
-	if(buffer[0]= '\0'){
+	if(buffer[0]== '\0'){
 		return 0;
 	}
 	else{
@@ -47,7 +47,7 @@ char *nextToken(){
 		return NULL;
 	}
 }
-void rewind(){
+void myrewind(){
 // reinitializes the private buffer with the string originally provided by initBuffer() function call
 	int i;
 	// using the backup we had initially saved, we reintialize the buffer
@@ -56,8 +56,8 @@ void rewind(){
 	}
 }
 
-
-
+void main(void){
+}	
 
 
 
