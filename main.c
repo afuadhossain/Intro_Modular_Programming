@@ -1,10 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "syntax.h"
+#include <string.h>
 #include "parse.h"
 
 void main(int argc,char *argv[])
 {	
+	/*
 	//will throw an error statement if you have entered more than one text file
 	if(argc==1){
 		printf("You have not entered a txt file, please enter a txt file\n");	
@@ -13,6 +15,9 @@ void main(int argc,char *argv[])
 	if(argc>2){
 		printf("You have entered more than one txt file, please enter one txt file\n");	
 	}
+	*/
+
+
 	//intializing a file pointer that will point to the designated file	
 	FILE *file_ptr;
 	char line[300];
@@ -28,17 +33,18 @@ void main(int argc,char *argv[])
 	fgets(line,299,file_ptr);
 	//checking syntax of line and then retrieving the subsequent lines
 	while (!feof(file_ptr)){
+		line[strcspn(line,"\n")]=0;
 		//No spaces, command
 		if(strchr(line,' ')==NULL) {
 			if (isValidCommand(line)==0){
-				printf("ERROR!!! you messed up on line: %d/n%s/n", linenumber, line);
+				printf("ERROR!!! you messed up on line: %d\n%s\n", linenumber, line);
 				
 			}
 		} 
 		//Has spaces, expression
 		else {
 			if (isValidExpression(line)==0){
-				printf("ERROR!!! you messed up on line: %d/n%s/n", linenumber, line);
+				printf("ERROR!!! you messed up on line: %d\n%s\n", linenumber, line);
 			}
 		}
 		linenumber++;
