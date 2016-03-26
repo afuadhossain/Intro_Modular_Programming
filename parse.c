@@ -56,8 +56,4 @@ void myrewind(){
 	}
 }
 
-void main(void){
-}	
-
-
 
