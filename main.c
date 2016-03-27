@@ -6,18 +6,16 @@
 
 void main(int argc,char *argv[])
 {	
-	/*
+	
 	//will throw an error statement if you have entered more than one text file
 	if(argc==1){
-		printf("You have not entered a txt file, please enter a txt file\n");	
+		printf("You have not entered a txt file, please enter one txt file following the format: ./a.out NAME.txt\n");	
 	}
 	//will throw an error statement if you have entered no text file
 	if(argc>2){
-		printf("You have entered more than one txt file, please enter one txt file\n");	
+		printf("You have entered more than one txt file, please enter one txt file following the format: ./a.out NAME.txt\n");	
 	}
-	*/
-
-
+	
 	//intializing a file pointer that will point to the designated file	
 	FILE *file_ptr;
 	char line[300];
@@ -37,14 +35,14 @@ void main(int argc,char *argv[])
 		//No spaces, command
 		if(strchr(line,' ')==NULL) {
 			if (isValidCommand(line)==0){
-				printf("ERROR!!! you messed up on line: %d\n%s\n", linenumber, line);
+				printf("\nERROR! Line: %d, Invalid command:***%s\nAcceptable commands include: TAKEASTEP,LEFT,RIGHT,PICKUP,DROP,DETECTMARKER,TURNON,TURNOFF\n", linenumber, line);
 				
 			}
 		} 
 		//Has spaces, expression
 		else {
 			if (isValidExpression(line)==0){
-				printf("ERROR!!! you messed up on line: %d\n%s\n", linenumber, line);
+				printf("\nERROR!!! you goofed on line: %d\n%s\n", linenumber, line);
 			}
 		}
 		linenumber++;
