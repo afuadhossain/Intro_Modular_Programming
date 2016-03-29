@@ -51,6 +51,11 @@ char *nextToken(){
 	if(*p=='\0'){
  		return NULL;
 	}
+	//making sure that the pointers are not pointed at extra spaces between commands
+	while(*q==' '){
+		p++;
+		q++;
+	}
 	//q moves across the buffer until it hits a space or null terminator
 	while(*q!=' ' && *q!='\0') {
 		q++;
@@ -63,9 +68,10 @@ char *nextToken(){
 		i++;
 		p++;
 	}
+	//making sure the end of a token has a null pointer
 	tokenBuffer[i]='\0';
 	//we move p and q to the next token if and only they both land on a space
-	if(p!='\0' || " "){
+	if(p!='\0'){
 		 p++;
 	}
 	q=p;
