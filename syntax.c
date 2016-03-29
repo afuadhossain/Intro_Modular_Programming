@@ -14,19 +14,19 @@ int isValidCommand(char *token){
 	}
 	else{
 		return 0;
-	}	
+	}
 }
 int isValidExpression(char *expression){
 // • REPEAT n TIMES comma-separated-list-of-commands END • WHILE NOT c DO comma-separated-list-of-commands END • SAY “message”
 
-	
+
 	initBuffer(expression);
 	char *token=nextToken();
 	//in the next set of if statements, we are checking to see if the first token is either REPEAT, WHILE, or SAY, else we return 0.
 
-	
+
 	//Checking to see that the expression follows the structure: REPEAT n TIMES comma-separated-list-of-commands END
-	
+
 	if (strcasecmp(token, "REPEAT")==0){
 		token=nextToken();
 		if(token==NULL) return 0; //////////////////////////////////////
@@ -103,7 +103,7 @@ int isValidExpression(char *expression){
 		}
 		token=nextToken();
 		if(token==NULL){
-			return 1;	
+			return 1;
 		}
 	}
 	return 0;
