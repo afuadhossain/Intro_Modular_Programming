@@ -31,18 +31,19 @@ void main(int argc,char *argv[])
 	fgets(line,299,file_ptr);
 	//checking syntax of line and then retrieving the subsequent lines
 	while (!feof(file_ptr)){
+		//this get  rids of the new line that is also taken when using fget for a line
 		line[strcspn(line,"\n")]=0;
 		//No spaces, command
 		if(strchr(line,' ')==NULL) {
 			if (isValidCommand(line)==0){
-				printf("\nERROR! Line: %d, Invalid command:***%s\nAcceptable commands include: TAKEASTEP,LEFT,RIGHT,PICKUP,DROP,DETECTMARKER,TURNON,TURNOFF\n", linenumber, line);
+				printf("\nERROR! You messed up on Line: %d\nInvalid command: ***%s\nAcceptable commands: TAKEASTEP,LEFT,RIGHT,PICKUP,DROP,DETECTMARKER,TURNON,TURNOFF\n", linenumber, line);
 				
 			}
 		} 
 		//Has spaces, expression
 		else {
 			if (isValidExpression(line)==0){
-				printf("\nERROR!!! you goofed on line: %d\n%s\n", linenumber, line);
+				printf("\nERROR! You messed up on line: %d\nInvalid expresison: %s\n", linenumber, line);
 			}
 		}
 		linenumber++;
