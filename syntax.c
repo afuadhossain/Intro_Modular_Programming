@@ -6,15 +6,6 @@
 
 int isValidCommand(char *token){
 // A robot command is atomic. It is a single word that directs the robot to do a specific self-contained task. Legal commands are: TAKEASTEP, LEFT, RIGHT, PICKUP, DROP, DETECTMARKER, TURNON, and TURNOFF. These commands are not case sensitive, so Walk, walk, walK, and WALK are all valid
-	
-	
-	int i;
-	for(i=0; i<strlen(token); i++) {
-		if(token[i]==',') {
-			token[i]= ' ';
-		}
-	}
-
 
 
 	//verifying that commands are valid, else return 0;
@@ -49,16 +40,20 @@ int isValidExpression(char *expression){
 		}
 		token=nextToken();
 		if(token==NULL) return 0; ///////////////////////////////////
-		while(isValidCommand(token)==1){
+		if(isValidCommand(token)==0){
+			return 0;
+		}
+		do{
 			token=nextToken();
 			if(token==NULL) return 0;////////////////////////////
 		}
+		while(isValidCommand(token)==1);
 		if(strcasecmp(token, "END")!=0){
 			return 0;
 		}
 		token=nextToken();
 		if(token==NULL) return 1;
-		
+
 	}
 	//Checking to see that the expression follows the structure: WHILE NOT c DO comma-separated list-of-commands END
 
@@ -80,10 +75,14 @@ int isValidExpression(char *expression){
 		}
 		token=nextToken();
 		if(token==NULL) return 0; //////////////////////////////
-		while(isValidCommand(token)==1){
-			token=nextToken();
-			if(token==NULL) return 0; //////////////////////////////
+		if(isValidCommand(token)==0){
+			return 0;
 		}
+		do{
+			token=nextToken();
+			if(token==NULL) return 0;////////////////////////////
+		}
+		while(isValidCommand(token)==1);
 		if(strcasecmp(token, "END")!=0){
 			return 0;
 		}
@@ -93,8 +92,17 @@ int isValidExpression(char *expression){
 	//Checking to see that the expression follows the structure: SAY "message"
 	if (strcasecmp(token, "SAY")==0){
 		token=nextToken();
-		if(token==NULL) return 0; //////////////////////////////
-		if(token!=NULL){
+		if(token[0]!= '\"'){
+			return 0;
+		}
+		while(hasNextToken()==1){
+			token=nextToken();
+		}
+		if(token[strlen(token)-1]!='\"'){
+			return 0;
+		}
+		token=nextToken();
+		if(token==NULL){
 			return 1;	
 		}
 	}
